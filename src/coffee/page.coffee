@@ -1,47 +1,29 @@
 # Connect Leap Motion actions.
 # TODO Only handle work when focused.
 
-openImageUnderFinger = (frame) ->
-  # Get bounding box of finger.
-  pointable = frame.pointables[0]
-  position = [
-    $(window).width()/2 + 6*pointable.tipPosition[0],
-    $(window).height() - 4*pointable.tipPosition[1] + $('header[role=page]').height() + 150,
-    pointable.tipPosition[2]
-  ]
-
-  # Move the pointer.
-
-  # Find the dude under the element.
-  elem = document.elementFromPoint position[0], position[1]
-  $elem = $(elem)
-  $elem.parent().find('.active').removeClass('.active')
-  $elem.addClass 'active' unless $elem.hasClass 'active'
-$ ->
+#$ ->
   # Load the mason!
-  $ct = $('section[role=page]')
-  #$ct.imagesLoaded ->
-    #$ct.masonry {
-      #itemSelector: '.item'
-      #isFitWidth: true
-    #}
 
 Mulkar =
   View : Backbone.View.extend {
     el: 'section[role=page]'
-    initialize: () =>
-      @listenTo Mulkar.Tumblr.images, 'add', @addImage
-      @listenTo Mulkar.Tumblr.images, 'reset', @clearImages
-    addImage: (image) =>
+    initialize: () ->
+      this.listenTo Mulkar.Tumblr.images, 'add', @addImage
+      this.listenTo Mulkar.Tumblr.images, 'reset', @clearImages
+
+    addImage: (image) ->
       v = new Mulkar.Tumblr.ImageView {model: image}
-      console.log image
-      @$el.appendTo v.render().el
-    clearImages: () =>
-      @$el.find('div.item').remove()
+      elem = v.render()
+      elem.css 'background-image', "url(#{elem.find('figcaption').attr('data-src')})"
+      text = elem.find('span')
+      text.html(text.text())
+      @$el.append elem
+    clearImages: () ->
   }
   bind : ->
     console.log '[mlk] booting...'
     Mulkar.Tumblr.bind()
+    new Mulkar.View()
     Mulkar.Leap.bind()
     console.log '[mlk] booted, baby!'
 
@@ -71,7 +53,6 @@ Mulkar.Leap =
 
   toggleImageUnderFinger: (frame) ->
     view = Mulkar.Leap.findElementForFinger(frame)
-    console.log view
 
   invokeGestureMovement: (frame) ->
     true
@@ -93,17 +74,16 @@ Mulkar.Leap =
     Mulkar.Leap.controller.on 'animationFrame', Mulkar.Leap.setPointer
     Mulkar.Leap.controller.connect()
 
-Mulkar.Tumblr = {}
 Mulkar.Tumblr =
   images: null
   bind: ->
-    console.log '[mlk] booting tumblr...'
     Mulkar.Tumblr.images = new Mulkar.Tumblr.ImageCollection()
-    Mulkar.Tumblr.images.fetch
-      success: (collection, response) ->
-        _.each collection.models, (model) ->
-          console.log model.toJSON()
+    console.log '[mlk] booting tumblr...'
+    Mulkar.Tumblr.images.fetch()
     console.log '[mlk] booted tumblr, baby!'
+
+  addImage: (image) ->
+    v = new Mulkar.Tumblr.ImageView({model: image})
 
   ImageModel : Backbone.Model.extend({
     defaults:
@@ -114,7 +94,6 @@ Mulkar.Tumblr =
   })
 
   ImageCollection : Backbone.Collection.extend({
-    model: Mulkar.Tumblr.ImageModel
     url: '/images'
   })
 
@@ -126,24 +105,27 @@ Mulkar.Tumblr =
       'leap:point': 'expand'
       'leap:leave': 'leave'
     initialize: ->
-      @listenTo @model, 'tumblr:load:finished', @paint
-      console.log @
+      @listenTo @model, 'img load', @paint
       @$el.data 'view', @
     paint: ->
-      console.log "[mlk] painting #{@model.image}.."
-      @$el.css 'background-image', "url(#{@model.image})"
+      console.log "[mlk] painting #{@model('image').url}.."
+      @$el.css 'background-image', "url(#{@model('image').url})"
     expand: ->
-      console.log "[mlk] visualing #{@model.image}.."
+      console.log "[mlk] visualing #{@model('image').url}.."
       @$el.addClass 'active'
     leave: ->
-      console.log "[mlk] leaving #{@model.image}.."
+      console.log "[mlk] leaving #{@model.get('image').url}.."
       @$el.removeClass 'active'
     render: ->
-      console.log @
-      @$el.html(@tmpl({link: @get('link'), user: @get('user'), text: @get('text'), image: @get('image')}))
+      @$el.html @tmpl {
+        link: @model.get('link')
+        user: @model.get('user')
+        text: @model.get('text')
+        image: @model.get('image')
+      }
+      @$el
   })
 
 window.Mulkar = Mulkar
-
 $ ->
   Mulkar.bind()

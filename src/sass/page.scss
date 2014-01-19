@@ -30,13 +30,14 @@ body {
     position: absolute;
     left: -8rem;
     top: -8rem;
+    z-index: 15;
   }
 
   header[role=page] {
     text-align: center;
     color: $bg-color;
     background-color: $fg-color;
-    padding: 3rem 0.5rem;
+    padding: 1rem 0rem;
     font-variant: small-caps;
     border-bottom: dashed 0.4rem $bg-color;
 
@@ -54,29 +55,22 @@ body {
   }
 
   section[role=page] {
-    width: 90%;
-    margin: 0rem 5%;
-
-    span.hi {
-      display: inline-block;
-      text-align: center;
-      font-size: 600%;
-      width: 100%;
-      padding: 2rem 0rem;
-    }
+    display: table;
 
     .item {
-      width: 240px;
+      width: 20%;
       height: 240px;
       float: left;
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      text-align: center;
+      display: table-cell;
+      vertical-align: center;
+      overflow: hidden;
 
-      &.active {
-        background-color: red;
-        background-image: none;
-      }
-
-      &:hover { 
-        @include opacity(0.4);
+      figcaption {
+        z-index: 28;
       }
     }
   }

@@ -4,19 +4,24 @@
     %meta{charset: 'utf-8'}/
     %title= "MLK, We &hearts; you"
     %script{type: 'text/javascript', src: '//code.jquery.com/jquery-1.10.2.min.js'}
-    %script{type: 'text/javascript', src: '//desandro.github.io/masonry/jquery.masonry.min.js'}
     %script{type: 'text/javascript', src: 'assets/underscore.js'}
     %script{type: 'text/javascript', src: 'assets/backbone.js'}
     %script{type: 'text/javascript', src: '//js.leapmotion.com/0.3.0-beta3/leap.js'}
     %script{type: 'text/javascript', src: 'assets/page.js', defer: :defer}
     %script{type: 'text/template', id: 'image-template'}
-      %img{src: "<%= image %>"}
+      :plain
+        <figcaption data-src="<%- image.url %>" data-width="<%- image.width %>" data-height="<%- image.height %>">
+          <h3><%- user %></h3>
+          <span><%- text %></span>
+          <a href="<%- link %>">View</a>
+        </figcaption>
     %link{rel: :stylesheet, href: 'assets/page.css'}
   %body
     #pointer
     %header{role: :page}
-      %h1.title MULKAR
+      %h1.title
+        MULKAR
+        %small ◕‿◕
       %p See the MLK? &hearts; the MLK. Embrace the MLK!
     %section{role: :page}
-      %span.hi HI ◕‿◕
     %footer{role: :page}

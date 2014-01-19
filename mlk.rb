@@ -1,10 +1,15 @@
 require 'bundler'
 Bundler.require(:default)
 
+require 'rack-livereload'
 require 'sinatra/json'
 require 'dotenv'
 
 Dotenv.load
+
+filtered_tags = [
+  ''
+]
 
 class Muklar < Sinatra::Base
   # Middle-AWESOME!
@@ -19,11 +24,10 @@ class Muklar < Sinatra::Base
         image: datum['photos'][0]['original_size'],
         link: datum['link_url'],
         user: datum['blog_name'],
-        text: datum['caption'],
+        text: URI.unescape(datum['caption']),
         time: datum['timestamp']
       } if datum.include? 'photos'
     end
-    puts ap(results)
     results
   end
 
@@ -32,7 +36,7 @@ class Muklar < Sinatra::Base
 
   get '/images' do
     tumblient = Tumblr::Client.new consumer_key: ENV['TUMBLR_CONSUMER_KEY']
-    data = tumblient.tagged('martinlutherking')
+    data = tumblient.tagged('mlkjr')
     images = parse_images_from_tumblr(data)
     json images
   end
