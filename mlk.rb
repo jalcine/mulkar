@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require(:default)
 
-require 'rack-livereload'
+require 'rack-livereload' unless ENV['RACK_ENV'] == 'production'
 require 'sinatra/json'
 require 'dotenv'
 
