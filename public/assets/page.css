@@ -1,0 +1,156 @@
+@import url(http://fonts.googleapis.com/css?family=Gudea:400:latin|Alegreya+Sans:400:latin);
+/* line 17, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 10, ../../src/sass/page.scss */
+body {
+  background-color: #241714;
+  color: #eeeeee;
+  font-family: 'Gudea';
+}
+/* line 15, ../../src/sass/page.scss */
+body h1, body h2 {
+  font-size: 2rem;
+}
+/* line 16, ../../src/sass/page.scss */
+body h3, body h4 {
+  font-size: 1.6rem;
+}
+/* line 17, ../../src/sass/page.scss */
+body h5, body h6 {
+  font-size: 1.2rem;
+}
+/* line 19, ../../src/sass/page.scss */
+body h1, body h2, body h3, body h4, body h5, body h6 {
+  font-family: 'Alegreya Sans';
+  font-weight: 400;
+}
+/* line 24, ../../src/sass/page.scss */
+body #pointer {
+  -webkit-transition: left 0.1s, top 0.1s;
+  -moz-transition: left 0.1s, top 0.1s;
+  -o-transition: left 0.1s, top 0.1s;
+  transition: left 0.1s, top 0.1s;
+  background-color: #f7d842;
+  border-radius: 50%;
+  width: 6rem;
+  height: 6rem;
+  position: absolute;
+  left: -8rem;
+  top: -8rem;
+}
+/* line 35, ../../src/sass/page.scss */
+body header[role=page] {
+  text-align: center;
+  color: #241714;
+  background-color: #eeeeee;
+  padding: 3rem 0.5rem;
+  font-variant: small-caps;
+  border-bottom: dashed 0.4rem #241714;
+}
+/* line 43, ../../src/sass/page.scss */
+body header[role=page] h1.title {
+  font-size: 400%;
+  text-transform: uppercase;
+}
+/* line 45, ../../src/sass/page.scss */
+body header[role=page].active {
+  background-color: #001a00;
+  color: #fff;
+}
+/* line 50, ../../src/sass/page.scss */
+body header[role=page].distracted {
+  background-color: #660000;
+  color: #fff;
+}
+/* line 56, ../../src/sass/page.scss */
+body section[role=page] {
+  width: 90%;
+  margin: 0rem 5%;
+}
+/* line 60, ../../src/sass/page.scss */
+body section[role=page] span.hi {
+  display: inline-block;
+  text-align: center;
+  font-size: 600%;
+  width: 100%;
+  padding: 2rem 0rem;
+}
+/* line 68, ../../src/sass/page.scss */
+body section[role=page] .item {
+  width: 240px;
+  height: 240px;
+  float: left;
+}
+/* line 73, ../../src/sass/page.scss */
+body section[role=page] .item.active {
+  background-color: red;
+  background-image: none;
+}
+/* line 78, ../../src/sass/page.scss */
+body section[role=page] .item:hover {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  opacity: 0.4;
+}
