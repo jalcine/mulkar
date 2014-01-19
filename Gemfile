@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.1.0'
+
 # Automation jazz.
 gem 'guard', '~> 2.3.0'
 gem 'guard-bundler', '~> 2.0.0'
