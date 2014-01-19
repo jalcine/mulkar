@@ -9,7 +9,7 @@ Dotenv.load
 
 class Muklar < Sinatra::Base
   # Middle-AWESOME!
-  use Rack::LiveReload
+  use Rack::LiveReload unless ENV['RACK_ENV'] == 'production'
   helpers Sinatra::JSON
   enable :logging
 
