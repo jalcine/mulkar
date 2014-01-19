@@ -1,0 +1,83 @@
+@import 'compass/reset';
+@import 'compass/css3/transition';
+@import 'compass/css3/opacity';
+@import 'compass/css3/images';
+@import url(http://fonts.googleapis.com/css?family=Gudea:400:latin|Alegreya+Sans:400:latin);
+
+$bg-color: #241714;
+$fg-color: #eeeeee;
+
+body {
+  background-color: $bg-color;
+  color: $fg-color;
+  font-family: 'Gudea';
+
+  h1, h2 { font-size: 2rem; }
+  h3, h4 { font-size: 1.6rem; }
+  h5, h6 { font-size: 1.2rem; }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Alegreya Sans';
+    font-weight: 400;
+  }
+
+  #pointer {
+    @include transition(left 0.1s, top 0.1s);
+    background-color: #f7d842;
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    position: absolute;
+    left: -8rem;
+    top: -8rem;
+  }
+
+  header[role=page] {
+    text-align: center;
+    color: $bg-color;
+    background-color: $fg-color;
+    padding: 3rem 0.5rem;
+    font-variant: small-caps;
+    border-bottom: dashed 0.4rem $bg-color;
+
+    h1.title { font-size: 400%; text-transform: uppercase; }
+
+    &.active {
+      background-color: darken(green, 20%);
+      color: #fff;
+    }
+
+    &.distracted {
+      background-color: darken(red, 30%);
+      color: #fff;
+    }
+  }
+
+  section[role=page] {
+    width: 90%;
+    margin: 0rem 5%;
+
+    span.hi {
+      display: inline-block;
+      text-align: center;
+      font-size: 600%;
+      width: 100%;
+      padding: 2rem 0rem;
+    }
+
+    .item {
+      width: 240px;
+      height: 240px;
+      float: left;
+
+      &.active {
+        background-color: red;
+        background-image: none;
+      }
+
+      &:hover { 
+        @include opacity(0.4);
+      }
+    }
+  }
+}
