@@ -76,7 +76,6 @@ Mulkar.Leap =
     $('.item').removeClass('active')
     $el.parents('.item').addClass 'active'
     console.log $el
-    #console.log $el.data('view')
     return $el.data('view')
 
   checkFingerInput: (frame) ->
