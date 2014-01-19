@@ -7,13 +7,12 @@
     %script{type: 'text/javascript', src: 'assets/underscore.js'}
     %script{type: 'text/javascript', src: 'assets/backbone.js'}
     %script{type: 'text/javascript', src: '//js.leapmotion.com/0.3.0-beta3/leap.js'}
+    %script{type: 'text/javascript', src: 'assets/curtsy.leapmotion.js'}
     %script{type: 'text/javascript', src: 'assets/page.js', defer: :defer}
     %script{type: 'text/template', id: 'image-template'}
       :plain
         <figcaption data-src="<%- image.url %>" data-width="<%- image.width %>" data-height="<%- image.height %>">
-          <h3><%- user %></h3>
-          <span><%- text %></span>
-          <a href="<%- link %>">View</a>
+          <h3><a href="<%- link %>"><%- user %></a></h3>
         </figcaption>
     %link{rel: :stylesheet, href: 'assets/page.css'}
   %body

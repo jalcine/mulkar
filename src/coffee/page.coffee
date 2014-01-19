@@ -20,6 +20,11 @@ Mulkar =
       @$el.append elem
     clearImages: () ->
   }
+  scrollToRow: (row) ->
+    minHeight = $('header').height()
+    rowHeight = row * $('section > .item').height()
+    movingHeight = rowHeight + minHeight
+    document.body.scrollTop = movingHeight
   bind : ->
     console.log '[mlk] booting...'
     Mulkar.Tumblr.bind()
@@ -39,7 +44,11 @@ Mulkar.Leap =
     ]
   setPointer: (frame) ->
     coords = Mulkar.Leap.obtainCoordinates(frame)
-    coords = [$(window).width() / 2, $(window).height() / 2] unless coords?
+    #coords = [$(window).width() / 2, $(window).height() / 2] unless coords?
+    return unless coords?
+    max_width = $(window).width() - ($('#pointer').width() / 2)
+    coords[0] = max_width if coords[0] >= max_width
+    coords[1] = $('header').height() if coords[1] <= $('header').height()
     $('#pointer').css({
       left: coords[0],
       top:  coords[1]
@@ -49,18 +58,25 @@ Mulkar.Leap =
     frame.pointables.length == 1 and frame.hands.length == 1
 
   isGesturing: (frame) ->
-    true
+    frame.gestures.length
 
   toggleImageUnderFinger: (frame) ->
     view = Mulkar.Leap.findElementForFinger(frame)
 
   invokeGestureMovement: (frame) ->
-    true
+    console.log frame
+    gesture = frame.gestures[0]
+    if gesture.type == 'swipe'
+      console.log 'swipe', Curtsy.direction(gesture)
+      console.log Curtsy.direction(gesture).type
 
   findElementForFinger: (frame) ->
     coords = Mulkar.Leap.obtainCoordinates(frame)
     $el = $ document.elementFromPoint coords[0], coords[1]
-    console.log $el.data('view')
+    $('.item').removeClass('active')
+    $el.parents('.item').addClass 'active'
+    console.log $el
+    #console.log $el.data('view')
     return $el.data('view')
 
   checkFingerInput: (frame) ->
@@ -106,7 +122,7 @@ Mulkar.Tumblr =
       'leap:leave': 'leave'
     initialize: ->
       @listenTo @model, 'img load', @paint
-      @$el.data 'view', @
+      @listenTo @$el, 'click', @scrollTO
     paint: ->
       console.log "[mlk] painting #{@model('image').url}.."
       @$el.css 'background-image', "url(#{@model('image').url})"
@@ -116,16 +132,24 @@ Mulkar.Tumblr =
     leave: ->
       console.log "[mlk] leaving #{@model.get('image').url}.."
       @$el.removeClass 'active'
+    scrollTo: ->
+      row = Math.ceil(@$el.index() / 5)
+      Mulkar.scrollToRow row
     render: ->
+      console.log @model
       @$el.html @tmpl {
         link: @model.get('link')
         user: @model.get('user')
         text: @model.get('text')
         image: @model.get('image')
       }
+      @$el.data 'view', @
       @$el
   })
 
 window.Mulkar = Mulkar
 $ ->
-  Mulkar.bind()
+  setTimeout ->
+    Mulkar.bind()
+    $('body').css 'background-image', 'none'
+  , 500

@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Gudea:400:latin|Alegreya+Sans:400:latin);
+@import url(http://fonts.googleapis.com/css?family=Gudea:200,700:latin|Alegreya+Sans:200,700:latin);
 /* line 17, ../../../../../.rbenv/versions/2.1.0/lib/ruby/gems/2.1.0/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -64,30 +64,30 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   display: block;
 }
 
-/* line 10, ../../src/sass/page.scss */
+/* line 11, ../../src/sass/page.scss */
 body {
   background-color: #241714;
   color: #eeeeee;
   font-family: 'Gudea';
 }
-/* line 15, ../../src/sass/page.scss */
+/* line 16, ../../src/sass/page.scss */
 body h1, body h2 {
   font-size: 2rem;
 }
-/* line 16, ../../src/sass/page.scss */
+/* line 17, ../../src/sass/page.scss */
 body h3, body h4 {
   font-size: 1.6rem;
 }
-/* line 17, ../../src/sass/page.scss */
+/* line 18, ../../src/sass/page.scss */
 body h5, body h6 {
   font-size: 1.2rem;
 }
-/* line 19, ../../src/sass/page.scss */
+/* line 20, ../../src/sass/page.scss */
 body h1, body h2, body h3, body h4, body h5, body h6 {
   font-family: 'Alegreya Sans';
-  font-weight: 400;
+  font-weight: 700;
 }
-/* line 24, ../../src/sass/page.scss */
+/* line 25, ../../src/sass/page.scss */
 body #pointer {
   -webkit-transition: left 0.1s, top 0.1s;
   -moz-transition: left 0.1s, top 0.1s;
@@ -100,57 +100,79 @@ body #pointer {
   position: absolute;
   left: -8rem;
   top: -8rem;
+  z-index: 15;
 }
-/* line 35, ../../src/sass/page.scss */
+/* line 37, ../../src/sass/page.scss */
 body header[role=page] {
   text-align: center;
   color: #241714;
   background-color: #eeeeee;
-  padding: 3rem 0.5rem;
+  padding: 1rem 0rem;
   font-variant: small-caps;
   border-bottom: dashed 0.4rem #241714;
 }
-/* line 43, ../../src/sass/page.scss */
+/* line 45, ../../src/sass/page.scss */
 body header[role=page] h1.title {
   font-size: 400%;
   text-transform: uppercase;
 }
-/* line 45, ../../src/sass/page.scss */
+/* line 47, ../../src/sass/page.scss */
 body header[role=page].active {
   background-color: #001a00;
   color: #fff;
 }
-/* line 50, ../../src/sass/page.scss */
+/* line 52, ../../src/sass/page.scss */
 body header[role=page].distracted {
   background-color: #660000;
   color: #fff;
 }
-/* line 56, ../../src/sass/page.scss */
+/* line 58, ../../src/sass/page.scss */
 body section[role=page] {
-  width: 90%;
-  margin: 0rem 5%;
-}
-/* line 60, ../../src/sass/page.scss */
-body section[role=page] span.hi {
-  display: inline-block;
-  text-align: center;
-  font-size: 600%;
+  background-image: url(../assets/loading.gif);
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
   width: 100%;
-  padding: 2rem 0rem;
+  height: 100%;
+  min-height: 600px;
 }
-/* line 68, ../../src/sass/page.scss */
+/* line 66, ../../src/sass/page.scss */
 body section[role=page] .item {
-  width: 240px;
+  width: 20%;
   height: 240px;
   float: left;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  overflow: hidden;
+  display: table;
 }
-/* line 73, ../../src/sass/page.scss */
-body section[role=page] .item.active {
-  background-color: red;
-  background-image: none;
+/* line 77, ../../src/sass/page.scss */
+body section[role=page] .item figcaption {
+  -webkit-transition: background-color 0.4s, font-size 0.6s;
+  -moz-transition: background-color 0.4s, font-size 0.6s;
+  -o-transition: background-color 0.4s, font-size 0.6s;
+  transition: background-color 0.4s, font-size 0.6s;
+  z-index: 28;
+  height: 100%;
+  width: 100%;
+  vertical-align: middle;
+  display: table-cell;
+  background-color: rgba(58, 58, 58, 0.2);
+  overflow-x: hidden;
 }
-/* line 78, ../../src/sass/page.scss */
-body section[role=page] .item:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
-  opacity: 0.4;
+/* line 87, ../../src/sass/page.scss */
+body section[role=page] .item figcaption a {
+  color: #fff;
+  text-decoration: none;
+  font-variant: small-caps;
+}
+/* line 91, ../../src/sass/page.scss */
+body section[role=page] .item:hover figcaption, body section[role=page] .item.active figcaption {
+  background-color: rgba(58, 58, 58, 0.95);
+}
+/* line 93, ../../src/sass/page.scss */
+body section[role=page] .item:hover figcaption a, body section[role=page] .item.active figcaption a {
+  font-weight: 700;
 }
